@@ -7,13 +7,14 @@ title: Chenzyishere's blog
 subtitle: "Welcome to my blog"
 description: ""
 keywords:
-author: ChenzyMark
+author: Chenzyishere
 language: zh-CN
 timezone: ""
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://github.com/Chenzyishere
+url: https://blog.chenzymark.space
+root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -101,4 +102,4 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ""
+  type: ''
