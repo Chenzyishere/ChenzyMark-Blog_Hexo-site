@@ -1,15 +1,14 @@
-# 目录设置
+﻿# 目录设置
 menu:
-  Home: / || fas fa-home
-  Projects: /projects/ || fas fa-folder-open
-  Archives: /archives/ || fas fa-archive
-  Tags: /tags/ || fas fa-tags
-  Categories: /categories/ || fas fa-folder-open
-  List||fas fa-list:
-    Music: /music/ || fas fa-music
-    Movie: /movies/ || fas fa-video
-  Link: /link/ || fas fa-link
-  About: /about/ || fas fa-heart
+  首页: / || fas fa-home
+  项目: /projects/ || fas fa-folder-open
+  归档: /archives/ || fas fa-archive
+  知识索引: /taxonomy/ || fas fa-layer-group
+  清单||fas fa-list:
+    音乐: /music/ || fas fa-music
+    电影: /movies/ || fas fa-video
+  友链: /link/ || fas fa-link
+  关于: /about/ || fas fa-heart
 
 # 全局设置 (确保顶格)
 darkmode:
@@ -35,7 +34,7 @@ subtitle:
     - 量化学习驱散认知迷雾
 
 # 全局背景图
-background: https://i.loli.net/2019/09/09/5oDRkWVKctx2b6A.png
+background: "linear-gradient(135deg, #0b1020 0%, #0f1b36 45%, #12324a 100%)"
 
 # 侧边栏头像
 avatar:
@@ -93,3 +92,42 @@ wordcount:
   post_wordcount: true
   min2read: true
   total_wordcount: true
+
+# 搜索（知识库检索入口）
+search:
+  use: local_search
+  local_search:
+    preload: true
+    top_n_per_article: 2
+    unescape: false
+    pagination:
+      enable: true
+      hitsPerPage: 8
+
+# Theme color customization
+theme_color:
+  enable: true
+  main: "#58A6FF"
+  paginator: "#2DD4BF"
+  button_hover: "#38BDF8"
+  text_selection: "#2DD4BF"
+  link_color: "#7DD3FC"
+  meta_color: "#9AA4B2"
+  hr_color: "#2A4365"
+  code_foreground: "#F59E0B"
+  code_background: "rgba(88, 166, 255, 0.12)"
+  toc_color: "#2DD4BF"
+  blockquote_padding_color: "#58A6FF"
+  blockquote_background_color: "#58A6FF"
+  scrollbar_color: "#58A6FF"
+  meta_theme_color_light: "#0f172a"
+  meta_theme_color_dark: "#020617"
+
+mask:
+  header: false
+  footer: false
+
+display_mode: dark
+
+
+
