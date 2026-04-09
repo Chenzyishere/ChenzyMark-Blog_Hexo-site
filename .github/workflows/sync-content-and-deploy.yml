@@ -1,16 +1,33 @@
-name: Sync Content and deploy
+name: Sync Content and Deploy
 
 on:
   repository_dispatch:
     types: [content-updated]
+  push:
+    branches: ["main"]
+    paths:
+      - "source/**"
+      - "themes/**"
+      - "_config.yml"
+      - "_config.butterfly.yml"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/sync-content-and-deploy.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  sync-to-main:
+  sync-build-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout blog repo (main)
         uses: actions/checkout@v4
@@ -19,13 +36,16 @@ jobs:
           fetch-depth: 0
 
       - name: Checkout content repo
+        if: github.event_name == 'repository_dispatch'
         uses: actions/checkout@v4
         with:
-          repository: Chenzyishere/chenzymark-documents
+          repository: ChenzyMarkkk/chenzymark-documents
+          ref: main
           path: _content_repo
           token: ${{ secrets.DOCS_REPO_PAT }}
 
       - name: Sync source/ from content repo
+        if: github.event_name == 'repository_dispatch'
         run: rsync -av --delete _content_repo/source/ source/
 
       - name: Setup Node
@@ -42,10 +62,22 @@ jobs:
           npm run clean
           npm run build
 
-      - name: Commit and push to main
+      - name: Commit synced source/public to main
+        if: github.event_name == 'repository_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add source public
           git diff --cached --quiet || git commit -m "chore(content): sync from documents repo"
           git push origin main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
