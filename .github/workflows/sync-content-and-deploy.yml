@@ -1,4 +1,4 @@
-name: Sync Content and Deploy
+﻿name: Sync Content and Deploy
 
 on:
   repository_dispatch:
@@ -39,14 +39,14 @@ jobs:
         if: github.event_name == 'repository_dispatch'
         uses: actions/checkout@v4
         with:
-          repository: ChenzyMarkkk/chenzymark-documents
+          repository: Chenzyishere/chenzymark-documents
           ref: main
           path: _content_repo
           token: ${{ secrets.DOCS_REPO_PAT }}
 
-      - name: Sync source/ from content repo
+      - name: Sync source/_posts from content repo
         if: github.event_name == 'repository_dispatch'
-        run: rsync -av --delete _content_repo/source/ source/
+        run: rsync -av --delete _content_repo/source/_posts/ source/_posts/
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -62,13 +62,13 @@ jobs:
           npm run clean
           npm run build
 
-      - name: Commit synced source/public to main
+      - name: Commit synced posts/public to main
         if: github.event_name == 'repository_dispatch'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add source public
-          git diff --cached --quiet || git commit -m "chore(content): sync from documents repo"
+          git add source/_posts public
+          git diff --cached --quiet || git commit -m "chore(content): sync posts from documents repo"
           git push origin main
 
       - name: Setup Pages
