@@ -37,8 +37,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build site
-        run: npm run build
+      - name: Clean and build site
+        run: |
+          npm run clean
+          npm run build
 
       - name: Commit and push to main
         run: |
