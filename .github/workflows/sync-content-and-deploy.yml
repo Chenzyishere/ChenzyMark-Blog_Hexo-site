@@ -21,7 +21,7 @@ jobs:
       - name: Checkout content repo
         uses: actions/checkout@v4
         with:
-          repository: ChenzyMarkkk/chenzymark-documents
+          repository: Chenzyishere/chenzymark-documents
           path: _content_repo
           token: ${{ secrets.DOCS_REPO_PAT }}
 
