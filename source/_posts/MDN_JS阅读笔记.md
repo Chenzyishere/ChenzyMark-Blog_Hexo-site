@@ -1,6 +1,17 @@
-MDN上对JavaScript的介绍相当充分，本文档记录快速阅读JavaScript语言概览后记下来的知识点。
-
-
+---
+title: "MDN_JS概览阅读笔记"
+date: 2026-04-09 21:00:00
+updated: 2026-04-09 21:00:00
+tags:
+  - frontend
+  -	JavaScript
+  - Develop
+description: ""
+categories:
+  - 前端知识库
+  - JavaScript
+---
+*MDN上对JavaScript的介绍相当充分，本文档记录快速阅读JavaScript语言概览后记下来的知识点。*
 
 # 数据类型：（原始类型/对象）
 
@@ -477,3 +488,267 @@ function parentFunc(){
 # 类
 
 JavaScript提供类语法，和Java很相似。
+
+```
+class Person {
+	constructor(name){
+		this.name = name;
+	}
+	sayHello(){
+		return `你好,我是${this.name}!`;
+	}
+}
+const p = new Person("玛丽亚");
+console.log(p.sayHello());
+```
+
+JavaScript类只是必须使用new运算符初始化的函数。每次实例化类时，它会返回一个包含类所指定的方法和属性的对象。类并不强制执行代码组织，例如，你可以有返回类的函数，你可以每个文件有多个类。（类比较随意）
+
+```
+const withAuthentication = (cls) =>
+	class extends cls {
+		authenticate(){
+		//...
+		}
+	};
+	
+class Admin extends withAuthentication(Person){
+	//...
+}
+```
+
+在前面添加static创建静态属性。在前面添加#号，不是private创建私有属性。井号是属性名不可缺少的一部分。（把#当作Python中的_）。与大多数其他语言不同，绝对没有办法再类体外读取私有属性，甚至再派生类中也不行。
+
+# 异步编程
+
+JavaScript本质上是单线程的。没有并行，只有并发。异步编程是由事件循环驱动，事件循环准许一组任务入队并轮询任务直至完成。
+
+在JavaScript中，有三种惯用的书写异步代码的方式：
+
+1.基于回调的(例如setTimeout())
+
+2.基于Promise的
+
+3.async/await，是Promise的语法糖
+
+例如，JavaScript中读取文件的操作:
+
+```
+//基于回调的
+fs.readFile(filename,(err,content) => {
+	//在读取文件时激活回调，可能需要一会才读取文件
+	if(err){
+		throw err;
+	}
+	console.log(content);
+});
+
+//这里的代码会在等待读取文件的期间被执行
+
+//基于Promise的
+fs.readFile(filename).then((content) => {
+	//读取文件时发生的事
+	console.log(content);
+}).catch((err) => {
+	throw err;
+});
+//这里的代码会在等待读取文件的期间被执行
+
+//Async/await
+async function readFile(filename){
+	const content = await fs.readFile(filename);
+	console.log(content);
+}
+```
+
+核心语言并没有指定任何的异步编程特性，但在与外补环境交互时，这个特性非常重要，从询问用户权限，获取数据，到读取文件。保持潜在地长时间运行的操作异步能确保这个操作等待期间其他进程仍然能运行。例如，在等待用户点击按钮授予权限期间，浏览器不会冻结。
+
+如果有一个异步的值，同步地得到这个值是不可能的。如果有一个promise，你只能通过then()方法访问最终的结果。同样地，await只能被用于异步上下文中，异步上下文通常是异步函数或模块。promise是永不阻塞的。只是依附于promise的结果的逻辑会被延迟。在此期间，其余部分继续执行。如果你是函数式编程者，你可以将promise当作单子（什么是单子？），可以用then()映射promise(然而,promise不是严格意义上的单子，它们会自动展平；例如，你不能有Promise<Promise<T>>)
+
+关于Promise,异步JavaScript，会单独用一个帖子总结。
+
+# 模块
+
+JavaScript也制定了一个大多数运行时都支持的模块系统。一个模块通常是一个文件，由文件的文件路径或URL标识。可以使用import和export语句在模块间交换数据：
+
+```
+import { foo } from "./foo.js";
+
+//未导出的变量是模块的本地变量
+const b = 2;
+
+export const a = 1;
+```
+
+JavaScript模块解析完全由宿主定义，通常基于URL或文件路径，因此相对文件路径就能有效，并且相对的是当前模块的路径，而不是某个项目的路径。
+
+# 语言和进行时
+
+在本文中，我们不断提及某个特性是语言级别的，而其他的则是运行时级别的。
+
+JavaScript是通用型脚本语言。核心语言规范是专注于纯计算逻辑的。它不处理任何的输入/输出——实际上，没有额外的运行时级别的API（特别是console.log()），JavaScript程序的行为是完全不可以预测的。
+
+运行时或宿主将数据反馈给JavaScript引擎（解释器）、提供额外的全局属性，为引擎提供钩子与外部世界交互。模块解析、读取数据、打印消息、发送网络请求等都是运行时级别的操作。自诞生以来JavaScript已被各种环境所采用，例如浏览器、Node.js。JavaScript已经成功整合到Web/移动应用/桌面应用/服务器端应用/无服务/嵌入式系统等等。
+
+在学习JavaScript核心特性的同时，了解宿主提供的特性也很重要，以便将知识付诸实践。可以阅读所有的Web平台API，由浏览器实现，有时候非浏览器宿主也会实现。
+
+# 继承与原型链
+
+继承是什么意思？将特性从父代传递给子代，以便新代码可以重用并基于现有代码的特性进行构建。JavaScript使用对象实现集成，每个对象都有一条链接到另一个称作原型的对象的内部链。该原型对象有自己的原型，依次类推，直到原型是null的对象。
+
+根据定义来说，null没有原型，并是原型链中的最后一环。
+
+在运行时，修改原型链的任何成员甚至换掉原型都是有可能的。
+
+实际上，原型继承模型要比类式模型更强大。例如，在原型模型的基础上构建类式模型（即类的实现方式）相当简单。
+
+尽管类现在被广泛使用并成为JavaScript中新的范式，但是类并没有引入新的继承模式。尽管类抽象掉了大部分的原型机制，但是理解原型的底层工作机制仍十分有用。
+
+## 基于原型链的继承
+
+### 继承属性
+
+JavaScript对象式动态的属性，称为自有属性“包”。JavaScript对象有一条指向原型对象的链。当试图访问对象的属性时，不仅在该对象上查找属性，还会在该对象的原型上查找属性，以及原型的原型。以此类推，指导找到一个名字匹配的属性，或者到达原型链的末尾null。
+
+指定对象的[[Prototype]]方法有：
+
+现在使用--proto--语法进行说明。
+
+```
+在像{a:1,b:2,__proto__:c}这样的对象字面量中，值c将变成字面量所表示的对象的[[Prototype]]，而其他像a和b这样的键就会变成对象的自有属性。
+```
+
+```
+const o = {
+	a:1,
+	b:2,
+	// __proto__设置了[[Prototype]]。在这里它被指定为另一个对象字面量。
+	__proto__:{
+	b:3,
+	c:4
+	}
+}
+
+//o.[[Prototype]]具有属性b和c
+//o.[[Prototype]].[[Prototype]]是Object.prototype
+//最后，o.[[Prototype]].[[Prototype]].[[Prototype]]是null（o的原型的原型的原型的原型，这个就是原型链的末尾）
+//因为根据定义，null没有[[Prototype]]
+//{a:1,b:2} ===> {b:3,c:4} ===> Object.prototype ===> null
+
+console.log(o.a);//1
+//o上是否有自有属性a?有，其值为1
+
+console.log(o.b);//2
+//o上有自有属性吗？有的其值为2
+//原型上也有“b”属性，但没有被访问
+//这被称为属性屏蔽（Property Shadowing）
+
+console.log(o.c);//4
+//o上有自有属性c吗？没有，检查其原型
+//o.[[Prototype]]上有自有属性"c"吗？有，其值为4
+
+console.log(o.d);//undefined
+//o上有自有属性d吗？没有，检查其原型
+//o.[[Prototype]]上有自有属性"d"吗？没有，检查其原型
+//o.[[Prototype]].[[Prototype]]上有自有属性d吗？没有，且这个是Object.Prototype，它默认没有d属性，检查其原型
+//o.[[Prototype]].[[Prototype]].[[Prototype]]为Null，停止搜索
+//未找到该属性，返回undefined
+```
+
+给对象设置属性会创建自有属性。获取和设置行为规则的唯一例外是当它被getter或setter拦截时。
+
+同理，可以创建更长的原型链，并在所有的原型链上查找属性。
+
+```
+const o = {
+  a: 1,
+  b: 2,
+  // __proto__ 设置了 [[Prototype]]。在这里它被指定为另一个对象字面量。
+  __proto__: {
+    b: 3,
+    c: 4,
+    __proto__: {
+      d: 5,
+    },
+  },
+};
+
+// { a: 1, b: 2 } ---> { b: 3, c: 4 } ---> { d: 5 } ---> Object.prototype ---> null
+
+console.log(o.d); // 5
+
+//这里就是有o.[[Prototype]].[[Prototype]].[[Prototype]]才是Object.prototype
+```
+
+### 继承方法
+
+JavaScript中定义方法的形式和基于类的语言定义方法的形式不同。在JavaScript中，对象可以以属性的形式添加函数。继承的函数与其他属性一样，包括属性遮蔽（在这种情况下，是一种方法重写的方式）
+
+当执行继承的函数时，this值指向继承对象而不是将该函数作为其自有属性的原型对象。
+
+```
+const parent = {
+	value:2,
+	method(){
+		return this.value + 1;
+	},
+};
+
+console.log(parent.method());//3
+//当调用parent.method时，"this"指向parent?
+
+//child是一个继承了parent的对象
+const child = {
+	__proto__:parent,
+};
+console.log(child.method());//3
+//调用child.method时，"this"指向child
+//又因为child继承的是parent的方法
+//首先在child上寻找属性"value"
+//然而，因为child没有名为"value"的自有属性，该属性回在[[Prototype]]上被找到，即parent.value
+
+child.value = 4;//将child上的属性"value"赋值为4
+//这会遮蔽parent上的value属性
+//child对象现在看起来是这样的
+//{value:4,__proto__:{value:2,method:[Function]}}
+console.log(child.method());//5
+//因为child现在拥有value属性,this.value现在表示child.value
+```
+
+## 构造函数
+
+```
+const boxes = [
+	{value:1,getValue(){return this.value;}},
+	{value:2,getValue(){return this.value;}},
+	{value:3,getValue(){return this.value;}},
+]
+```
+
+这样会很冗余，所以我们可以将getValue移动到[[Prototype]]上
+
+```
+const boxPrototype = {
+	getValue(){
+		return this.value;
+	};
+};
+
+const boxes = [
+	{value:1,__proto__:boxPrototype},
+	{value:2,__proto__:boxPrototype},
+	{value:3,__proto__:boxPrototype},
+]
+```
+
+这样所有的盒子的getValue都会引用相同的函数，降低内存使用率。但是手动绑定proto还是很麻烦，所以引出构造函数new
+
+```
+Box.prototype.getValue = function(){
+	return this.value;
+};
+
+const boxes = [new Box(1),new Box(2),new Box(3)];
+```
+
+我们说new Box(1)是通过Box构造函数创建的一个实例。Box.prototype与我们之前创建的boxPrototype并无太大区别，它只是普通对象。
