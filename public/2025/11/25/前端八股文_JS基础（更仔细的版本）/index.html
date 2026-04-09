@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前端八股文_JS基础（更仔细的版本） | Chenzyishere's blog</title><meta name="author" content="Chenzyishere"><meta name="copyright" content="Chenzyishere"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#020617"><meta name="description" content="请简述JavaScript中的this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端八股文_JS基础（更仔细的版本）">
+<meta property="og:url" content="https://blog.chenzymark.space/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/index.html">
+<meta property="og:site_name" content="Chenzyishere&#39;s blog">
+<meta property="og:description" content="请简述JavaScript中的this">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg">
+<meta property="article:published_time" content="2025-11-25T06:46:08.000Z">
+<meta property="article:modified_time" content="2026-03-25T09:52:39.000Z">
+<meta property="article:author" content="Chenzyishere">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="json">
+<meta property="article:tag" content="network">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "前端八股文_JS基础（更仔细的版本）",
+  "url": "https://blog.chenzymark.space/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/",
+  "image": "https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg",
+  "datePublished": "2025-11-25T06:46:08.000Z",
+  "dateModified": "2026-03-25T09:52:39.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chenzyishere",
+      "url": "https://blog.chenzymark.space/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.chenzymark.space/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f172a')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端八股文_JS基础（更仔细的版本）',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background: linear-gradient(135deg, #0b1020 0%, #0f1b36 45%, #12324a 100%);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> Projects</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chenzyishere's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">前端八股文_JS基础（更仔细的版本）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> Projects</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">前端八股文_JS基础（更仔细的版本）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-25T06:46:08.000Z" title="发表于 2025-11-25 14:46:08">2025-11-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-25T09:52:39.000Z" title="更新于 2026-03-25 17:52:39">2026-03-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/">前端知识库</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>请简述JavaScript中的this</p>
+<p>答：this是一个关键字，在函数被调用的时候动态绑定，指向当前执行上下文中的“调用者”或“所属对象”。</p>
+<p>1.new绑定：最高优先级，当函数通过new关键字调用时，this指向新创建的实例对象。</p>
+<p>2.显式绑定：call apply bind来绑定：这三个方法都可以显示this指向。</p>
+<p>apply方法接收两个参数：一个是this绑定的对象，一个是参数数组。</p>
+<p>call方法：接收的第一个是this绑定的对象，后面的其余参数是传入函数执行的参数。</p>
+<p>bind方法：传入一个对象，返回一个this绑定了传入对象的新函数。这个函数的this执行那个除了使用new的时候会改变其他都不会改变。</p>
+<p>3.隐式绑定：对象方法调用。当函数作为对象的方法被调用时，this指向该对象。</p>
+<p>4.默认绑定：最低优先级，非严格模式下this指向全局对象，浏览器中是window，Node.js中是global。严格模式下this是 undefined</p>
+<p>箭头函数没有自己的this。</p>
+<p>AMD&#x2F;CommonJS&#x2F;ESM</p>
+<p>JavaScript模块化规范的问题。</p>
+<p>早期的JS没有模块化，所有的代码都在全局作用域，导致命名冲突、依赖混乱、无法按需加载、难以维护。</p>
+<p>AMD(Asynchronous Module Definition)浏览器友好的规范</p>
+<p>为浏览器环境设计的（网络加载慢的时候，需要异步的时候）<br>异步加载，不阻塞页面渲染，适合浏览器，所有的依赖都在define数组中提前声明。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//定义模块</span><br><span class="line">define([&#x27;./dependency&#x27;],function(dep)&#123;</span><br><span class="line">	return&#123;</span><br><span class="line">		name:&#x27;Bob&#x27;,</span><br><span class="line">		greet:()=&gt;dep.hello()</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//使用模块</span><br><span class="line">require([&#x27;./myModule&#x27;],function(myMod)&#123;</span><br><span class="line">	myMod.greet();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>个人感觉这个方法很复杂且麻烦。</p>
+<p>CommonJS</p>
+<p>是同步的模块化，由Node.js采用推广的。同步加载，适合服务器端</p>
+<p>运行的时候才会解析依赖，第一次require后会缓存，后续直接返回缓存，主要用于Node.js。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//导出</span><br><span class="line">module.exports = &#123;name:&#x27;Alice&#x27;&#125;;</span><br><span class="line">//或</span><br><span class="line">exports.sayHi = () =&gt; console.log(&#x27;Hi&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>ES6 Moudules (ESM)</p>
+<p>优势：静态分析，编译时确定依赖，同时支持同步&#x2F;异步操作。import是静态的，import()是动态的。浏览器原生支持，Node.js支持。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//ESM导出</span><br><span class="line">export const name = &#x27;Charlie&#x27;;</span><br><span class="line">export default function()&#123;&#125;</span><br><span class="line">//ESM导入</span><br><span class="line">import func,&#123;name&#125; from &#x27;./module.js&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>关于ESM和CommonJS的异同</p>
+<p>CommonJS是动态加载的（运行时），依赖关系在代码执行的时候才确定，ESM是静态的（编译时）。依赖关系在代码解析的阶段就确定了。</p>
+<p>CommonJS是同步的，ESM是同步异步都支持，import静态，import()动态</p>
+<p>CommonJS导出的是值的副本（拷贝），ESM导出的是只读绑定（活引用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//CommonJS</span><br><span class="line">//counter.js</span><br><span class="line">let count = 0;</span><br><span class="line">const inc = () =&gt; count++;</span><br><span class="line">module.exports = &#123;count,inc&#125;;</span><br><span class="line"></span><br><span class="line">//main.js</span><br><span class="line">const &#123;count,inc&#125; = require(&#x27;./counter.js&#x27;)</span><br><span class="line">inc();</span><br><span class="line">console.log(count);//0 因为在解析的时候已经拷贝好了值</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//ESM</span><br><span class="line">//counter.mjs</span><br><span class="line">export let count = 0;</span><br><span class="line">export const inc = ()=&gt; &#123;count++&#125;;</span><br><span class="line"></span><br><span class="line">//main.mjs</span><br><span class="line">import &#123;count,inc&#125; from &#x27;./counter.mjs&#x27;;</span><br><span class="line">inc();</span><br><span class="line">console.log(count)//1</span><br></pre></td></tr></table></figure>
+
+<p>this的指向：CommonJS模块内this&#x3D;&#x3D;&#x3D;module.exports，ESM的模块顶层 this&#x3D;&#x3D;&#x3D;undefined</p>
+<p>.mjs &#x3D; 强制使用ES6模块语法(import&#x2F;export)</p>
+<p>.js&#x3D;默认使用CommonJS(require&#x2F;module.exports)</p>
+<p>Node.js中的模块识别规则</p>
+<p>1.通过文件拓展名：.mjs强制ESM，.cjs强制CommonJS，.js看package.json</p>
+<p>2.通过package.json</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;type&quot;:&quot;module&quot; //所有.js视为ESM</span><br><span class="line">	&quot;type&quot;:&quot;commonjs&quot;//默认的</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>let const var的区别</p>
+<p>new操作符的实现原理</p>
+<p>原型和原型链</p>
+<p>JS里面很多的语法糖，都是基于原型继承的，目标就是让对象可以共享方法和属性，避免重复创建</p>
+<p>比如所有的数组都有push\map方法，但是不需要每个数组都存一个函数代码。</p>
+<p>1.每个函数都有prototype的属性</p>
+<p>只有函数(Function)才有prototype</p>
+<p>它是一个普通对象，默认包含一个constructor，这个constructor指向这个函数自己。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">console.log(Person.prototype);//&#123;constuctor:Person&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251123174638319.png" alt="image-20251123174638319"></p>
+<p>所有的构造函数都是Function的实例，所有的原型对象都是Object的实例，除了Object.prototype，它的原型是null</p>
+<p>在JavaScript中使用构造函数来新建一个对象的时候，每一个构造函数都有一个prototype原型对象，这个对象包含了可以由这个构造函数的所有实例共享的属性和方法。</p>
+<p>这些实例可以通过‘_proto_’来访问到这个构造函数的原型对象。</p>
+<p>原型链是什么？原型链就是当你在查找一个属性的时候，js引擎先会从该实例对象里寻找这个属性，如果没有，就向上查找它的构造函数的原型对象的属性，如果原型对象的属性还没有，就继续往上寻找。最后的尽头都会汇聚到Object.prototype，如果在Object.Prototype里面还没有，就会返回null。所以这就是为什么所有新建的对象都可以使用toString()，因为到最后都是返回到Object.prototype。</p>
+<p><strong>对执行上下文的理解</strong></p>
+<p>执行上下文其实是JS引擎的机制。是对代码执行的环境抽象，每当JS引擎运行一段代码都会创建一个对应的执行上下文。</p>
+<p>其实就是一个盒子，里面装着当前作用域里的变量、函数声明、this的指向、外层作用域的引用（用于形成作用域链）</p>
+<p><strong>1.执行上下文类型</strong></p>
+<p>(1)全局执行上下文</p>
+<p>任何不在函数内部的都是全局执行上下文，它首先会创建一个全局的window对象，并且设置this的值等于这个全局对象。一个程序中只有一个全局执行上下文。</p>
+<p>(2)函数执行上下文</p>
+<p>当一个函数被调用时，就会为该函数创建一个新的执行上下文，函数的上下文呢可以有任意个。</p>
+<p>(3)eval 函数执行上下文</p>
+<p>执行在eval函数中的代码会有属于他自己的执行上下文，不过eval函数不常使用。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251125142547496.png" alt="image-20251125142547496"></p>
+<p><strong>3.创建执行上下文的生命周期：两个阶段</strong></p>
+<p><strong>创建阶段(Creation Phase)</strong></p>
+<p>1.确定this的值</p>
+<p>全局上下文：this&#x3D;window(非严格模式)或undefined(严格模式)</p>
+<p>函数上下文：由调用方式决定（见this规则）</p>
+<p>2.创建词法环境</p>
+<p>环境记录：存储变量、函数声明、形参等等。</p>
+<p>在函数中：记录arguments、形参、var&#x2F;function声明</p>
+<p>对外部词法环境的引用：用于构建作用域链</p>
+<p>3.创建变量环境</p>
+<p>实际上在现代JS引擎中，词法环境约等于变量环境</p>
+<p>主要适用于存储var声明的变量（let&#x2F;const 存在暂时性死区）</p>
+<p><strong>执行阶段(Execution Phase)</strong></p>
+<p>引擎逐行执行代码、给变量赋值、执行函数调用、解析表达式</p>
+<p><strong>执行上下文栈</strong></p>
+<p>当JS执行代码时，首先遇到全局代码，会创建一个全局执行上下文并压入执行栈中，每当遇到一个函数调用就为该函数创建一个新的执行上下文并压入栈顶。</p>
+<p>引擎会执行位于执行上下文栈顶的函数，当函数执行完成之后，执行上下文从栈中弹出，继续执行下一个上下文。当所有代码执行完毕则弹出全局执行上下文。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let a = &#x27;Hello World&#x27;;</span><br><span class="line">function first()&#123;</span><br><span class="line">	console.log(&#x27;Inside first function&#x27;);</span><br><span class="line">	second();</span><br><span class="line">	console.log(&#x27;Again inside first function&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">function second()&#123;</span><br><span class="line">	console.log(&#x27;Inside second function&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单来说执行上下文就是指：在执行一点JS代码之前，需要先解析代码。解析的时候会创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都先拿出来，变量先赋值为undefined，函数先声明好可以使用。这一步执行完，才开始正式执行程序。</p>
+<p>在一个函数执行之前，也会创建一个函数执行上下文的环境，跟全局执行上下文类似，不过函数执行上下文会多出this&#x2F;arguments和函数参数</p>
+<p>全局上下文：变量定义、函数声明</p>
+<p>函数上下文：变量定义、函数声明、this、arguments</p>
+<p><strong>&#x3D;&#x3D;和&#x3D;&#x3D;&#x3D;的区别？</strong></p>
+<p>&#x3D;&#x3D;是类型转换后比较（抽象相等）</p>
+<p>&#x3D;&#x3D;&#x3D;严格相等，类型和值都必须相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0==false;//true</span><br><span class="line"></span><br><span class="line">0===false;//false</span><br></pre></td></tr></table></figure>
+
+<p><strong>null和undefined的区别？</strong></p>
+<p>undefined:变量已经声明，但是没有赋值，函数没有返回值默认返回undefined</p>
+<p>null:表示空值或有意absence of value，是对象类型的特殊值。</p>
+<p>判断一个变量是数组的原因</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Array.isArray(arr);//最可靠的方式</span><br><span class="line">//或者</span><br><span class="line">Object.prototype.toString.call(arr)===&#x27;[object Array]&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>事件冒泡vs事件捕获？</p>
+<p>事件捕获：从外向内捕获的(document -&gt; 目标元素)</p>
+<p>事件冒泡：从内向外（目标元素-&gt;document）</p>
+<p>原型和原型链？</p>
+<p>每个函数都有prototype属性（对象）。</p>
+<p>每个对象都有_proto_指向其构造函数的prototype</p>
+<p>当访问对象属性时，如果自身没有，则沿着_proto_上面查找，知道Object.prototype。如果Object.prototype还没有的话那就返回null</p>
+<p>this属性的绑定规则：</p>
+<p>1.new绑定：this指向新创建的对象</p>
+<p>2.显式绑定:call&#x2F;apply&#x2F;bind</p>
+<p>3.隐式绑定:obj.fn()，这个时候，指向这个调用函数的对象</p>
+<p>4.默认绑定：非严格模式下为window，严格模式下就是undefined。</p>
+<p>5.箭头函数：继承外层的this，他没有this属性</p>
+<p>宏任务 微任务</p>
+<p>宏任务：setTimeout setInterval I&#x2F;O UI渲染</p>
+<p>微任务：Promise.then&#x2F;catch&#x2F;finally&#x2F;queueMicrotask&#x2F;MutationObserver</p>
+<p>执行顺序：当前宏任务-&gt;所有微任务-&gt;渲染-&gt;下一个宏任务</p>
+<p>Event Loop</p>
+<p>浏览器&#x2F;Node.js中协调JS单线程与异步操作的机制：</p>
+<p>执行全局的脚本</p>
+<p>执行所有的微任务&#x2F;渲染UI（浏览器）&#x2F;取下一个宏任务，重复</p>
+<p>防抖vs节流</p>
+<p>防抖debounce:n秒内只执行最后一次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function debounce(fn,delay)&#123;</span><br><span class="line">	let timer;</span><br><span class="line">	return (...args)&#123;</span><br><span class="line">		clearTimeout(timer);</span><br><span class="line">		timer = setTimeout(()=&gt;fn.apply(this,args),delay)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">const test = function()&#123;</span><br><span class="line">	console.log(&#x27;1&#x27;)</span><br><span class="line">&#125;</span><br><span class="line">debounce(test,500)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>节流throttle:n秒内最多只执行一次</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function throttle(fn,delay)&#123;</span><br><span class="line">	let last = Date.now();</span><br><span class="line">	return (...args)=&gt;&#123;</span><br><span class="line">		const now = Date.now();</span><br><span class="line">		if(now -last &gt; delay)&#123;</span><br><span class="line">			last = now;</span><br><span class="line">			fn.apply(this,args);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">const test = function()&#123;</span><br><span class="line">	console.log(&#x27;1&#x27;)</span><br><span class="line">&#125;</span><br><span class="line">throttle(test,500)</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="/">Chenzyishere</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenzymark.space/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/">https://blog.chenzymark.space/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.chenzymark.space" target="_blank">Chenzyishere's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/frontend/">frontend</a><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/json/">json</a><a class="post-meta__tags" href="/tags/network/">network</a></div><div class="post-share"><div class="social-share" data-image="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/01/01/WebComponents/" title="WebComponents"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">WebComponents</div></div><div class="info-2"><div class="info-item-1">global.js负责初始化所有自定义的Web Components、绑定全局事件、提供跨组件通信能力，并确保主题在各种设备和交互场景下稳定运行。</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_React/" title="前端八股文_React"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">前端八股文_React</div></div><div class="info-2"><div class="info-item-1">React18的更新</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="项目相关问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-14</div><div class="info-item-2">项目相关问题</div></div><div class="info-2"><div class="info-item-1">关于项目可能会问到的问题</div></div></div></a><a class="pagination-related" href="/2026/01/01/SEO%E4%BC%98%E5%8C%96/" title="SEO优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">SEO优化</div></div><div class="info-2"><div class="info-item-1">SEO优化</div></div></div></a><a class="pagination-related" href="/2025/10/05/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_Vue%E4%B8%93%E9%A2%98/" title="前端八股文——Vue专题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-05</div><div class="info-item-2">前端八股文——Vue专题</div></div><div class="info-2"><div class="info-item-1">Vue 核心概念、生命周期与路由模式总结。</div></div></div></a><a class="pagination-related" href="/2026/01/01/JSON/" title="JSON"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">JSON</div></div><div class="info-2"><div class="info-item-1">JSON(JavaScript Object Notation,JavaScript 对象表示法)</div></div></div></a><a class="pagination-related" href="/2026/01/01/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="前端性能优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">前端性能优化</div></div><div class="info-2"><div class="info-item-1">前端性能优化</div></div></div></a><a class="pagination-related" href="/2025/10/31/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_HTML%E5%92%8CCSS/" title="前端八股文——HTML&amp;CSS专题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-31</div><div class="info-item-2">前端八股文——HTML&amp;CSS专题</div></div><div class="info-2"><div class="info-item-1">HTML面试题</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Chenzyishere</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/09/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="Hexo博客插件使用指南">Hexo博客插件使用指南</a><time datetime="2026-04-09T04:00:00.000Z" title="发表于 2026-04-09 12:00:00">2026-04-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/25/codex_log/" title="Codex Update Log">Codex Update Log</a><time datetime="2026-03-25T10:08:13.000Z" title="发表于 2026-03-25 18:08:13">2026-03-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/06/hello-world/" title="Hello World">Hello World</a><time datetime="2026-03-06T05:59:35.636Z" title="发表于 2026-03-06 13:59:35">2026-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/22/vw&amp;vh&amp;em&amp;rem/" title="vw&amp;vh&amp;em&amp;rem">vw&amp;vh&amp;em&amp;rem</a><time datetime="2026-02-22T09:01:16.000Z" title="发表于 2026-02-22 17:01:16">2026-02-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/01/01/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="前端性能优化">前端性能优化</a><time datetime="2026-01-01T03:33:01.000Z" title="发表于 2026-01-01 11:33:01">2026-01-01</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Chenzyishere</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>

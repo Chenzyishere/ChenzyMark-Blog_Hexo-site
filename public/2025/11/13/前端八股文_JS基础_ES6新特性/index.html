@@ -1,0 +1,332 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前端八股文_JS基础_ES6新特性 | Chenzyishere's blog</title><meta name="author" content="Chenzyishere"><meta name="copyright" content="Chenzyishere"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#020617"><meta name="description" content="常用的ES6的新特性：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端八股文_JS基础_ES6新特性">
+<meta property="og:url" content="https://blog.chenzymark.space/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="Chenzyishere&#39;s blog">
+<meta property="og:description" content="常用的ES6的新特性：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg">
+<meta property="article:published_time" content="2025-11-13T04:06:31.000Z">
+<meta property="article:modified_time" content="2026-03-25T09:52:39.000Z">
+<meta property="article:author" content="Chenzyishere">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "前端八股文_JS基础_ES6新特性",
+  "url": "https://blog.chenzymark.space/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/",
+  "image": "https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg",
+  "datePublished": "2025-11-13T04:06:31.000Z",
+  "dateModified": "2026-03-25T09:52:39.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chenzyishere",
+      "url": "https://blog.chenzymark.space/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.chenzymark.space/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f172a')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前端八股文_JS基础_ES6新特性',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background: linear-gradient(135deg, #0b1020 0%, #0f1b36 45%, #12324a 100%);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">17</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> Projects</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chenzyishere's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">前端八股文_JS基础_ES6新特性</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> Projects</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">前端八股文_JS基础_ES6新特性</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-13T04:06:31.000Z" title="发表于 2025-11-13 12:06:31">2025-11-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-25T09:52:39.000Z" title="更新于 2026-03-25 17:52:39">2026-03-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/">前端知识库</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="常用的ES6的新特性："><a href="#常用的ES6的新特性：" class="headerlink" title="常用的ES6的新特性："></a>常用的ES6的新特性：</h2><h3 id="1-1-let和const命令"><a href="#1-1-let和const命令" class="headerlink" title="1.1 let和const命令"></a>1.1 let和const命令</h3><p>都是具有块级作用域的属性</p>
+<p>1.变量不能重复声明</p>
+<p>2.let有块级作用域：不仅仅针对花括号，例如if()里面也不行，这个例子里面的变量girl只在花括号{}内部有效，外部访问就会报错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	let girl = &#x27;123&#x27;</span><br><span class="line">&#125;</span><br><span class="line">console.log(girl)//error</span><br></pre></td></tr></table></figure>
+
+<p>3.不存在变量提前</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a) //error</span><br><span class="line">let a=&#x27;123&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>4.不影响作用域链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let school = &#x27;abc&#x27;</span><br><span class="line">function fn()&#123;</span><br><span class="line">	console.log(school)//abc</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作用域链的概念：当在当前作用域找不到变量时，会沿着嵌套关系逐级向上查找的机制，在这个例子中，在fn()函数中，找不到school变量，于是就网上查找，找全局作用域。</p>
+<h3 id="1-2-const"><a href="#1-2-const" class="headerlink" title="1.2 const"></a>1.2 const</h3><p>特性:声明常量</p>
+<p>const A &#x3D; ‘abc’</p>
+<p>1.一定要赋初始值</p>
+<p>2.一般常量使用大写（潜规则）</p>
+<p>3.常量的值不能修改</p>
+<p>4.也具有块级作用域</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	const pyaler = &#x27;uzi&#x27;</span><br><span class="line">&#125;</span><br><span class="line">console.log(player)//error</span><br></pre></td></tr></table></figure>
+
+<p>5.对于数组和对象的元素修改，不算作对常量的修改，因为常量的地址没有变化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const team = [&#x27;33&#x27;,&#x27;22&#x27;,&#x27;11&#x27;]</span><br><span class="line">team.push(&#x27;44&#x27;);//不报错，因为常量的地址没有变化</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3解构赋值"><a href="#1-3解构赋值" class="headerlink" title="1.3解构赋值"></a>1.3解构赋值</h3><p>ES6允许按照一定模式从数组和对象中提取值，对变量进行赋值，这被称为解构赋值</p>
+<p>数组的解构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const F4 = [&#x27;小沈阳&#x27;，&#x27;刘能&#x27;,&#x27;赵四&#x27;,&#x27;宋小宝&#x27;]</span><br><span class="line">let [xiao,liu,zhao,song] = F4; </span><br><span class="line">console.log(xiao)//小沈阳</span><br><span class="line">console.log(liu)//刘能</span><br><span class="line">console.log(zhao)//赵四</span><br><span class="line">console.log(song)//宋小宝</span><br></pre></td></tr></table></figure>
+
+<p>对象的解构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const zhao = &#123;</span><br><span class="line">    name : &#x27;赵本山&#x27;，</span><br><span class="line">    age: &#x27;不详&#x27;,</span><br><span class="line">    xiaopin: function()&#123;</span><br><span class="line">        console.log(&quot;我可以演小品&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let &#123;name,age,xiaopin&#125; = zhao;//新建了一个数组，将</span><br><span class="line">console.log(name);</span><br><span class="line">console.log(age);</span><br><span class="line">console.log(xiaopin);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4模板字符串"><a href="#1-4模板字符串" class="headerlink" title="1.4模板字符串"></a>1.4模板字符串</h3><p>特性：</p>
+<p>1.声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let str=`我是一个字符串`</span><br><span class="line">console.log(str,typeof str);</span><br></pre></td></tr></table></figure>
+
+<p>2.内容中可以直接出现换行符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let str = `&lt;ul&gt;</span><br><span class="line">			&lt;li&gt;RHF&lt;/li&gt;</span><br><span class="line">			&lt;li&gt;RHF&lt;/li&gt;</span><br><span class="line">		   &lt;/ul&gt;`；</span><br></pre></td></tr></table></figure>
+
+<p>3.变量拼接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let lovest = &#x27;RHF&#x27;;</span><br><span class="line">let out = `$&#123;lovest&#125;222`</span><br><span class="line">console.log(out)//RHF222</span><br></pre></td></tr></table></figure>
+
+<p>1.4 对象的简化写法</p>
+<p>介绍：ES6允许在大括号里面，直接写入变量和函数，作为对象的属性和方法</p>
+<p>特性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let name = &#x27;aaa&#x27;;</span><br><span class="line">let change = function()&#123;</span><br><span class="line">	console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">const school = &#123;</span><br><span class="line">	name,</span><br><span class="line">	change,</span><br><span class="line">	imporve()&#123;</span><br><span class="line">		console.log(bbb)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5箭头函数"><a href="#1-5箭头函数" class="headerlink" title="1.5箭头函数"></a>1.5箭头函数</h3><p>ES6允许使用箭头()&#x3D;&gt;{}定义函数</p>
+<p>特性：1.this是静态的，this始终指向函数声明时所在作用域下的this的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">	console.log(this.name)</span><br><span class="line">&#125;</span><br><span class="line">let B =()=&gt;&#123;</span><br><span class="line">	console.log(this.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">window.name = &#x27;尚硅谷&#x27;;</span><br><span class="line">const school =&#123;</span><br><span class="line">	name:&#x27;ATGUIGU&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//直接调用</span><br><span class="line">A()//尚硅谷</span><br><span class="line">B()//尚硅谷</span><br><span class="line"></span><br><span class="line">//call</span><br><span class="line">A.call(school);//ATGUIGU</span><br><span class="line">B.call(school);//尚硅谷</span><br></pre></td></tr></table></figure>
+
+<p>call函数是改变函数的指向对象，这个时候我们可以发现，箭头函数的this依然指向的是全局作用域。所以说，普通函数的this是静态的，可以通过call&#x2F;bind&#x2F;apply来改变，但是箭头函数的this是静态的，在定义时已经确定，无法改变。个人认为箭头函数静态的this会更好，不需要讨论this的指向问题。</p>
+<h4 id="拓展一个this的绑定规则"><a href="#拓展一个this的绑定规则" class="headerlink" title="*拓展一个this的绑定规则"></a>*拓展一个this的绑定规则</h4><p>1.this的默认绑定（独立的函数调用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function showThis()&#123;</span><br><span class="line">	console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">showthis();//浏览器中是window,node.js中是global</span><br></pre></td></tr></table></figure>
+
+<p>2.隐式绑定（方法调用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cosnt person = &#123;</span><br><span class="line">	name:&#x27;Alice&#x27;,</span><br><span class="line">	greet:function()&#123;</span><br><span class="line">		console.log(`Hello,I&#x27;m$&#123;this.name&#125;`)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//方法赋值给变量 - 隐式绑定丢失</span><br><span class="line">const greetFunc = person.greet;</span><br><span class="line">greetFunc();//Hello,I&#x27;m $&#123;undefined&#125; - this指向了全局</span><br><span class="line">//回调函数中的隐式丢失</span><br><span class="line">setTimeout(person.greet,100);//Hello,I&#x27;m undefined</span><br></pre></td></tr></table></figure>
+
+<p>3.显式绑定（call&#x2F;apply&#x2F;bind）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function introduce()&#123;</span><br><span class="line">	console.log(`I&#x27;m &#123;$this.name&#125;`)</span><br><span class="line">&#125;</span><br><span class="line">const person1 = &#123;name:&#x27;Alice&#x27;&#125;</span><br><span class="line">const person2 = &#123;name：&#x27;Bob&#x27;&#125;</span><br><span class="line"></span><br><span class="line">//call/apply - 立即执行</span><br><span class="line">introduce.call(person1)//I&#x27;m Alice</span><br><span class="line">introduce.apply(person2)//I&#x27;m Bob</span><br><span class="line">//bind - 返回新函数</span><br><span class="line">const boundIntroduce=introduce.bind(person1);</span><br><span class="line">boundIntroduce();//I&#x27;m Alice</span><br></pre></td></tr></table></figure>
+
+<p>4.new绑定（构造函数）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	console.log(this);//Person &#123;name:&#x27;Alice&#x27;&#125;</span><br><span class="line">&#125;</span><br><span class="line">const alice = new Person(&#x27;Alice&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>5.箭头函数（词法作用域）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const obj=&#123;</span><br><span class="line">	name:&#x27;Alice&#x27;,</span><br><span class="line">	normalFunc:function()&#123;</span><br><span class="line">		console.log(this.name);//Alice</span><br><span class="line">	&#125;,</span><br><span class="line">	arrowFunc:()=&gt;&#123;</span><br><span class="line">		console.log(this.name);//undefined(指向外层作用域)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.normalFunc();//Alice</span><br><span class="line">obj.arrowFunc();//undefined</span><br></pre></td></tr></table></figure>
+
+<p>箭头函数永远指向外层作用域，this不会改变的，始终指向外层作用域</p>
+<p>2.不能作为构造实例化对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let A(name,age)=&gt;&#123;</span><br><span class="line">	this.name=name;</span><br><span class="line">	this.age=age;</span><br><span class="line">&#125;</span><br><span class="line">let me = new A(&#x27;xiao&#x27;,123)</span><br><span class="line">console.log(me);//error</span><br></pre></td></tr></table></figure>
+
+<p>3.不能使用arguments变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let fn =()=&gt;&#123;</span><br><span class="line">	console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line">fn(1,2,3)//error</span><br></pre></td></tr></table></figure>
+
+<p>*arguments变量</p>
+<p>是一个在普通函数内部可用的类数组对象，包含了传递给函数的参数信息。</p>
+<p>4.简写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let add = n =&gt; &#123;</span><br><span class="line">	return n+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>省略花括号，当代码体只有一条语句的时候，此时return也必须省略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let add = n =&gt; n+1</span><br></pre></td></tr></table></figure>
+
+<p>（我不是很喜欢这样写，感觉可读性很差）</p>
+<h3 id="1-6函数参数默认值"><a href="#1-6函数参数默认值" class="headerlink" title="1.6函数参数默认值"></a>1.6函数参数默认值</h3><p>ES6允许给函数参数赋值初始值</p>
+<p>可以给形参赋初始值，一般位置要靠后（潜规则）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b,c=12)&#123;</span><br><span class="line">	return a+b+c;</span><br><span class="line">&#125;</span><br><span class="line">let result = add(1,2);</span><br><span class="line">console.log(result)//15</span><br></pre></td></tr></table></figure>
+
+<p>2.与解构赋值结合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function A(&#123;host=&#x27;127.0.0.1&#x27;,username,password,port&#125;)&#123;</span><br><span class="line">	console.log(host+username+password+port)</span><br><span class="line">&#125;</span><br><span class="line">A(&#123;</span><br><span class="line">	username:&#x27;ran&#x27;,</span><br><span class="line">	password:&#x27;123456&#x27;,</span><br><span class="line">	port:3306</span><br><span class="line">&#125;)</span><br><span class="line">//127.0.0.1ran1234563306</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-7rest参数"><a href="#1-7rest参数" class="headerlink" title="1.7rest参数"></a>1.7rest参数</h3><p>ES6引入rest参数，用于获取函数的实参，用来代替arguments</p>
+<p>*arguments和rest的对比</p>
+<table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="left"><code>arguments</code></th>
+<th align="left">Rest 参数 (<code>...args</code>)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>类型</strong></td>
+<td align="left">类数组对象</td>
+<td align="left">真正的数组</td>
+</tr>
+<tr>
+<td align="left"><strong>箭头函数</strong></td>
+<td align="left">不可用</td>
+<td align="left">可用</td>
+</tr>
+<tr>
+<td align="left"><strong>可读性</strong></td>
+<td align="left">隐式存在</td>
+<td align="left">显式声明</td>
+</tr>
+<tr>
+<td align="left"><strong>数组方法</strong></td>
+<td align="left">不能直接使用</td>
+<td align="left">可以直接使用</td>
+</tr>
+<tr>
+<td align="left"><strong>同步性</strong></td>
+<td align="left">与形参可能同步</td>
+<td align="left">独立存在</td>
+</tr>
+</tbody></table>
+<p>用法及对比</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// arguments - 隐式存在，无需声明</span><br><span class="line">function traditionalFunc(a, b) &#123;</span><br><span class="line">    console.log(&#x27;命名参数:&#x27;, a, b);</span><br><span class="line">    console.log(&#x27;arguments:&#x27;, arguments);</span><br><span class="line">    console.log(&#x27;参数个数:&#x27;, arguments.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">traditionalFunc(1, 2, 3, 4);</span><br><span class="line">// 输出：</span><br><span class="line">// 命名参数: 1 2</span><br><span class="line">// arguments: [Arguments] &#123; &#x27;0&#x27;: 1, &#x27;1&#x27;: 2, &#x27;2&#x27;: 3, &#x27;3&#x27;: 4 &#125;</span><br><span class="line">// 参数个数: 4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// Rest 参数 - 需要显式声明</span><br><span class="line">function modernFunc(a, b, ...restArgs) &#123;</span><br><span class="line">    console.log(&#x27;命名参数:&#x27;, a, b);</span><br><span class="line">    console.log(&#x27;rest参数:&#x27;, restArgs);</span><br><span class="line">    console.log(&#x27;rest参数个数:&#x27;, restArgs.length);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">modernFunc(1, 2, 3, 4);</span><br><span class="line">// 输出：</span><br><span class="line">// 命名参数: 1 2</span><br><span class="line">// rest参数: [3, 4]</span><br><span class="line">// rest参数个数: 2</span><br></pre></td></tr></table></figure>
+
+<p>其实我的理解是，arguments和rest函数都是一个容器，给你的函数形参做填补的。比如说定义了给函数传入1，2，3，4，然后实际上存了1，2，3，4到arguments参数，在console.log函数的时候，如果只有a,b，就只print前面两个</p>
+<p>Rest函数要在函数形参里声明…restArgs，我是认为这样会更明显一些。</p>
+<p>例子上写，传入了1，2，3，4，函数形参只有(a,b,args)，此时a,b对应1，2，然后剩余的装进rest参数里，所以print出来是[3,4]，rest参数就有2。而且rest参数可以用于箭头函数当中</p>
+<h3 id="1-8扩展运算符"><a href="#1-8扩展运算符" class="headerlink" title="1.8扩展运算符"></a>1.8扩展运算符</h3><p>扩展运算符是能将数组转换为逗号分隔的参数序列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const tfboys=[&#x27;AA&#x27;,&#x27;BB&#x27;,&#x27;CC&#x27;]</span><br><span class="line">function chunwan()&#123;</span><br><span class="line">	console.log(arguments);</span><br><span class="line">&#125;</span><br><span class="line">chunwan(..tfboys);//0:&#x27;AA&#x27; 1:&#x27;BB&#x27; 2:&#x27;CC&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>应用</p>
+<p>1.数组的合并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const A=[&#x27;aa&#x27;,&#x27;bb&#x27;,&#x27;cc&#x27;]</span><br><span class="line">const B=[&#x27;cc&#x27;,&#x27;dd&#x27;]</span><br><span class="line">const C=[..A,..B]</span><br><span class="line">const.log(C)//[aa,bb,cc,dd]</span><br><span class="line">它自己可以识别，然后将数组合并</span><br></pre></td></tr></table></figure>
+
+<p>2.数组的克隆</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const A = [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;];</span><br><span class="line">const B = [..A];</span><br><span class="line">console.log(B)//[a,b,c]</span><br></pre></td></tr></table></figure>
+
+<p>3.将伪数组转换成真正的数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const A = documents.querySelectorAll(&#x27;div&#x27;);</span><br><span class="line">const B = [..A];</span><br><span class="line">console.log(B)//[div,div,div]</span><br><span class="line">//其实A这里获取的是操作DOM之后的选择器，并不是真正的数组，然后B就用扩展运算符..A，转化成了字符</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-9-Symbol"><a href="#1-9-Symbol" class="headerlink" title="1.9 Symbol"></a>1.9 Symbol</h3><p>ES6引入了新的原始数据类型Symbol，表示独一无二的值，它是JavaScript里第七种数据类型，是一种类似于字符串的数据类型。</p>
+<p>Symbol特点：</p>
+<p>Symbol的值是唯一的，用来解决命名冲突的问题</p>
+<p>Symbol的值不能与其他数据进行运算</p>
+<p>Symbol定义的对象属性不能使用 for..in循环遍历，但是可以使用Reflect.ownKeys来获取对象的所有键名</p>
+<p>1.创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let s = Symbol(&#x27;aa&#x27;);</span><br><span class="line">let s2= Symbol(&#x27;aa&#x27;);</span><br><span class="line">console.log(s===s2)	//false</span><br><span class="line"></span><br><span class="line">let s3 = Symbol.for(&#x27;bb&#x27;);</span><br><span class="line">let s4 = Symbol.for(&#x27;bb&#x27;);</span><br><span class="line">console.log(S3===S4)//TRUE</span><br></pre></td></tr></table></figure>
+
+<p>普通的Symbol(每次都是新的地址)</p>
+<p>但是使用Symbol.for()（全局共享）</p>
+<p>2.不能与其他数据进行运算</p>
+<p>3.Symbol内置值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Person&#123;</span><br><span class="line">	static [Symbol.hasInstance](param)&#123;</span><br><span class="line">		console.log(param);</span><br><span class="line">		console.log(&quot;我被用来检测了&quot;);</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">let o = &#123;&#125;;</span><br><span class="line">console.log(o instanceof Person);//我被用来检测了，false</span><br></pre></td></tr></table></figure>
+
+<p>1.给对象添加方法 方式一:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let game = &#123;</span><br><span class="line">	name:&#x27;ran&#x27;</span><br><span class="line">&#125;</span><br><span class="line">let methods = &#123;</span><br><span class="line">	up:Symbol()</span><br><span class="line">	down:Symbol()</span><br><span class="line">&#125;</span><br><span class="line">game[methods.up]=function()&#123;</span><br><span class="line">	console.log(&#x27;aaa&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.给对象添加方法 方式二：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let youxi = &#123;</span><br><span class="line">	name:&#x27;狼人杀&#x27;,</span><br><span class="line">	[Symbol(&#x27;say&#x27;)]:function()&#123;</span><br><span class="line">		console.log(&#x27;asd&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(youxi)	//name:&#x27;狼人杀&#x27;,Symbol(say)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-10-迭代器"><a href="#1-10-迭代器" class="headerlink" title="1.10 迭代器"></a>1.10 迭代器</h3><p>1.迭代器(Iterator)是一种接口，为各种不同的数据结构提供统一的访问机制，任何数据结构只要部署Iterator接口，就可以完成遍历操作。</p>
+<p>2.原理：创建一个指针对象，指向数据结构的起始位置，第一次调用&#x3D;&#x3D;next() &#x3D;&#x3D;方法，指针自动指向数据结构第一个成员，接下来不断调用next()，指针一直向后移动，直到指向最后一个成员，没调用next()返回一个包含value和done属性的对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const xiyou=[&#x27;AA&#x27;,&#x27;BB&#x27;,&#x27;CC&#x27;,&#x27;DD&#x27;]</span><br><span class="line">for(let v of xiyou)&#123;</span><br><span class="line">	console.log(v)	//</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ES7-ES10的新特性："><a href="#ES7-ES10的新特性：" class="headerlink" title="ES7-ES10的新特性："></a>ES7-ES10的新特性：</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="/">Chenzyishere</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenzymark.space/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/">https://blog.chenzymark.space/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.chenzymark.space" target="_blank">Chenzyishere's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/frontend/">frontend</a><a class="post-meta__tags" href="/tags/javascript/">javascript</a></div><div class="post-share"><div class="social-share" data-image="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" title="项目相关问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">项目相关问题</div></div><div class="info-2"><div class="info-item-1">关于项目可能会问到的问题</div></div></div></a><a class="pagination-related" href="/2025/11/03/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_web%E5%AD%98%E5%82%A8HTTP%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="前端八股文——web存储/HTTP/计算机网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">前端八股文——web存储/HTTP/计算机网络</div></div><div class="info-2"><div class="info-item-1">前端八股文——web存储/HTTP/计算机网络</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/11/03/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_web%E5%AD%98%E5%82%A8HTTP%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="前端八股文——web存储&#x2F;HTTP&#x2F;计算机网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-03</div><div class="info-item-2">前端八股文——web存储&#x2F;HTTP&#x2F;计算机网络</div></div><div class="info-2"><div class="info-item-1">前端八股文——web存储/HTTP/计算机网络</div></div></div></a><a class="pagination-related" href="/2025/10/31/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_HTML%E5%92%8CCSS/" title="前端八股文——HTML&amp;CSS专题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-31</div><div class="info-item-2">前端八股文——HTML&amp;CSS专题</div></div><div class="info-2"><div class="info-item-1">HTML面试题</div></div></div></a><a class="pagination-related" href="/2026/01/01/SEO%E4%BC%98%E5%8C%96/" title="SEO优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">SEO优化</div></div><div class="info-2"><div class="info-item-1">SEO优化</div></div></div></a><a class="pagination-related" href="/2025/11/20/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_React/" title="前端八股文_React"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-20</div><div class="info-item-2">前端八股文_React</div></div><div class="info-2"><div class="info-item-1">React18的更新</div></div></div></a><a class="pagination-related" href="/2026/01/01/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="前端性能优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">前端性能优化</div></div><div class="info-2"><div class="info-item-1">前端性能优化</div></div></div></a><a class="pagination-related" href="/2026/01/01/JSON/" title="JSON"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">JSON</div></div><div class="info-2"><div class="info-item-1">JSON(JavaScript Object Notation,JavaScript 对象表示法)</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84ES6%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">常用的ES6的新特性：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-let%E5%92%8Cconst%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 let和const命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-const"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="toc-number">1.3.</span> <span class="toc-text">1.3解构赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.4.</span> <span class="toc-text">1.4模板字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">1.5箭头函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E4%B8%80%E4%B8%AAthis%E7%9A%84%E7%BB%91%E5%AE%9A%E8%A7%84%E5%88%99"><span class="toc-number">1.5.1.</span> <span class="toc-text">*拓展一个this的绑定规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-number">1.6.</span> <span class="toc-text">1.6函数参数默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7rest%E5%8F%82%E6%95%B0"><span class="toc-number">1.7.</span> <span class="toc-text">1.7rest参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">1.8.</span> <span class="toc-text">1.8扩展运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-Symbol"><span class="toc-number">1.9.</span> <span class="toc-text">1.9 Symbol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">1.10.</span> <span class="toc-text">1.10 迭代器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ES7-ES10%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">ES7-ES10的新特性：</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Chenzyishere</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
