@@ -1,4 +1,4 @@
-name: Sync Content And Deploy
+name: Sync Content To Main
 
 on:
   repository_dispatch:
@@ -9,13 +9,13 @@ permissions:
   contents: write
 
 jobs:
-  sync-build-deploy:
+  sync-to-main:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout blog repo
+      - name: Checkout blog repo (main)
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Checkout content repo
@@ -26,24 +26,12 @@ jobs:
           token: ${{ secrets.DOCS_REPO_PAT }}
 
       - name: Sync source/ from content repo
+        run: rsync -av --delete _content_repo/source/ source/
+
+      - name: Commit and push to main
         run: |
-          rsync -av --delete _content_repo/source/ source/
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build site
-        run: npm run build
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          publish_branch: gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add source
+          git diff --cached --quiet || git commit -m "chore(content): sync from documents repo"
+          git push origin main
