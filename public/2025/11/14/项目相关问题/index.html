@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>项目相关问题 | Chenzyishere's blog</title><meta name="author" content="Chenzyishere"><meta name="copyright" content="Chenzyishere"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#020617"><meta name="description" content="关于项目可能会问到的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目相关问题">
+<meta property="og:url" content="https://blog.chenzymark.space/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Chenzyishere&#39;s blog">
+<meta property="og:description" content="关于项目可能会问到的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg">
+<meta property="article:published_time" content="2025-11-14T18:56:13.000Z">
+<meta property="article:modified_time" content="2026-03-25T17:52:39.000Z">
+<meta property="article:author" content="Chenzyishere">
+<meta property="article:tag" content="frontend">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="json">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="storage">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "项目相关问题",
+  "url": "https://blog.chenzymark.space/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/",
+  "image": "https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg",
+  "datePublished": "2025-11-14T18:56:13.000Z",
+  "dateModified": "2026-03-25T17:52:39.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chenzyishere",
+      "url": "https://blog.chenzymark.space/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.chenzymark.space/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f172a')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '项目相关问题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background: linear-gradient(135deg, #0b1020 0%, #0f1b36 45%, #12324a 100%);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chenzyishere's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">项目相关问题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">项目相关问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-11-14T18:56:13.000Z" title="发表于 2025-11-14 18:56:13">2025-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-25T17:52:39.000Z" title="更新于 2026-03-25 17:52:39">2026-03-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/">前端知识库</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BA%93/%E5%B7%A5%E7%A8%8B%E5%8C%96/">工程化</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>关于项目可能会问到的问题</p>
+<h3 id="一、-Vue-js-核心与生态相关问题"><a href="#一、-Vue-js-核心与生态相关问题" class="headerlink" title="一、 Vue.js 核心与生态相关问题"></a><strong>一、 Vue.js 核心与生态相关问题</strong></h3><p>这类问题会考察你对Vue框架本身的理解。</p>
+<h3 id="1-基础原理："><a href="#1-基础原理：" class="headerlink" title="1. 基础原理："></a><strong>1. 基础原理：</strong></h3><p><strong>“你在两个项目中分别用了Vue2和Vue3，能说说你理解中它们最大的区别是什么吗？”</strong></p>
+<p>答：Vue2应用的是Option API，Vue3用的是Composition API，Vue2在声明、应用组件的时候需要比较多的步骤，后期更改模块或者是更新模块，都比较麻烦。Vue3用Composition API，很多时候都只需要引入就行，Vue3会自动声明，就减少很多的麻烦。</p>
+<p>Compostition API就提供了更灵活的组织模式，处理复杂逻辑时也可以将相关的逻辑抽取到组合函数中，提高代码可读性和可复用性。</p>
+<p>一开始在“易购商城”使用Vue2是因为我对该版本更熟悉，初学者跟着视频学习，更熟悉一点。后期在灵犀AI项目使用Vue3，第一是更加新的版本，了解更多新版本的特性，Vue3的性能优势，尝试一些使用Composition API，更好的更小的打包体积</p>
+<p><strong>“Vue3的Composition API相对于Vue2的Options API有什么优势？你在‘灵犀AI’项目中是怎么使用Composition API的？”</strong></p>
+<p>答：Composition API的核心优势还挺多的，比如说在逻辑上，Vue2一个功能的相关的代码（数据、方法、计算属性、生命周期）要全部强制拆分到data&#x2F;methods&#x2F;mounted等等不同选项，组件复杂后，理解一个功能要反复阅读，这是我在做Vue2项目里的体会。</p>
+<p>Composition的优势在于允许我们将同一个业务的逻辑相关的所有代码都写在一起，（方法、生命周期钩子、操作函数），全部放在script setup里面，代码的可读性和可维护性都高很多。</p>
+<p>Vue3也对TypeScript有更好的支持，不过我暂时还没有使用过TypeScript。</p>
+<p>在’’灵犀AI’这个项目中，我封装了组合式函数chat.js，在Composition API里面就可以用这个封装好的函数直接调用，一行代码就可以引入功能，复用性提高，不需要重复的代码。在逻辑上也进行隔离，只需要负责处理信息，组件就只需要关注在交互上就可以了。而且也好测试，可以单独测试chat.js。</p>
+<p><strong>“Vue的响应式原理能简单说一下吗？Vue2和Vue3的实现有什么不同？”</strong></p>
+<p>答：Vue的响应式原理是它的核心机制，简单来说就是数据发生变化时可以自动更新视图。Vue的响应式完成三件事：1。依赖收集，数据被读取时，记录下谁用到了这个数据。2。派发更新：在数据被修改时，通知所有用到这个数据的地方进行更新。3.触发渲染：最终驱动视图重新渲染。</p>
+<p>Vue2的实现是基于OBject.defineProperty，Vue2通过遍历数据对象的所有属性，使用ES5的Object.defineProperty将它们转换为getter和setter。</p>
+<p>Vue3的实现是基于Proxy，使用ES6的Proxy，Proxy可以拦截整个对象的操作，而不是单个属性。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251108170959024.png" alt="image-20251108170959024"></p>
+<p><strong>“你用过Pinia，那能说说Pinia和Vuex的区别吗？为什么Vue3项目更推荐Pinia？”</strong></p>
+<p>答：Pinia的操作更加简单，移除了Mutations，在Vuex中Mutations同步操作，用于修改State，而Actions是异步操作，提交Mutations来修改State。在Pinia中，Actions可以处理异步也可以直接修改State。</p>
+<p>而且Pinia的Store本身就是一个组合式的函数，与Composition API的理念是完全一致的。模块化管理更加简单，Vuex的模块需要嵌套和命名空间，而Pinia通过不同的store文件就自然划分好了。</p>
+<h3 id="2-状态管理："><a href="#2-状态管理：" class="headerlink" title="2. 状态管理："></a><strong>2. 状态管理：</strong></h3><p><strong>“在‘易购商城’里，你用Pinia管理了哪些状态？为什么要选择用状态管理库，直接用组件通信不行吗？”</strong></p>
+<p>1.用户的状态：登陆状态、用户详细信息、认证的token</p>
+<p>2.购物车的状态：购物车的商品列表、是否选中结算、最后的更新时间</p>
+<p>3.全局UI的状态：全局的加载状态、主题模式、全局的消息通知</p>
+<p>对于简单的父子通信其实直接用props&#x2F;$emit就足够了，但是在易购商城这种复杂的系统里，组件通信问题很多，比如说多层级的Props传递，组件通信的路径会变得很复杂，但是如果用Pinia，或者是事件总线，就可以减少很多麻烦，没有直接的父子关系。但是事件总线的事件来源不清晰，而且变得难以维护。</p>
+<p>并且在这个项目里，多个组件都要访问和修改到同一个购物车的数据，要添加商品到购物车、显示购物车的预览、结算读取购物车等等。如果没有集中状态管理的话很容易出现数据不同步、逻辑分散难以调试。</p>
+<p>Pinia的解决方案就直接很多，单一的数据源，消除数据的不一致。任何的组件都可以直接访问，不需要传递。</p>
+<p><strong>“‘灵犀AI’项目中，你是如何将Pinia的状态持久化到<code>localStorage</code>的？这个过程是同步还是异步的？需要考虑什么坑？”</strong></p>
+<p>用localStorage其实是保证用户在刷新页面或重新打开浏览器还能保持对话历史、用户偏好。</p>
+<p>我这里使用了一个pinia持久化的插件，在我的store文件里面添加pinia-plugin-persiststate，然后配置一个persist属性，在需要持久化的地方，消息对话的js里面就加一个persist:true，这样持久化配置。</p>
+<p>这个过程是一个同步的过程，所有的操作都会阻塞主线程直到完成</p>
+<p>需要考虑的坑和解决方案：</p>
+<p>1.性能问题:频繁的写入导致页面会卡顿，可以做一个防抖避免频繁写入</p>
+<p>2.数据的大小也有限制，localStorage只有5MB，可以解决，就是数据压缩+自动清理的功能</p>
+<p>3.数据类型丢失：JSON序列化的局限性。JSON.stringify会丢失Date Map Set等特殊对象</p>
+<p>4.隐私的考虑，比如说API密钥，就要选择性地使用localStorage持久化</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251114111515512.png" alt="image-20251114111515512"></p>
+<p><strong>3. 路由：</strong></p>
+<p><strong>“你说在‘易购商城’里用路由守卫做了权限控制，能详细说说实现逻辑吗？如果用户没登录，尝试访问订单页会发生什么？”</strong></p>
+<p>在“易购商城”项目中，我设计了一套基于Vue Router的前端权限控制系统，主要目的是防止未授权用户访问敏感页面。</p>
+<p>权限控制的核心思路是，在路由跳转前进行拦截，验证用户权限再决定是否放行。</p>
+<p>如何实现：就是在路由定义中meta字段声明每个路由的权限要求，受保护的加上meta:{requiresAuth}。在路由配置文件中实现全局守卫，前置守卫，检查通过就可以放行。</p>
+<p><strong>“Vue-Router的路由模式，Hash和History模式有什么区别？你们项目用的是哪种，为什么？”</strong></p>
+<p>Hash模式用的是一个#号后面再加地址，但是History模式有详细的分页名。我们用的是History，因为History方便辨识，简洁好看。缺点就就是要在部署的时候，在nginx的配置文件里面配置一下。</p>
+<h3 id="二、-项目深度与实现细节问题"><a href="#二、-项目深度与实现细节问题" class="headerlink" title="二、 项目深度与实现细节问题"></a><strong>二、 项目深度与实现细节问题</strong></h3><p>这类问题会针对你简历上写的“项目亮点”进行深挖，是面试的重点。</p>
+<p><strong>针对【灵犀AI对话平台】</strong></p>
+<p><strong>1. LLM API 调用模块：</strong></p>
+<ul>
+<li>“你设计的‘统一的LLM API调用模块’具体是怎么封装的？是基于<code>fetch</code>还是<code>axios</code>？”</li>
+<li><strong>“流式响应”</strong> 是高频重点问题：<ul>
+<li>“<strong>请详细解释一下你是如何实现流式消息响应的？</strong>” （期望你提到 <code>Fetch API</code> 的 <code>Response.body</code> 返回一个 <code>ReadableStream</code>，然后使用 <code>Reader</code> 读取，并逐步更新界面）</li>
+<li>“在处理流式数据时，如何控制对话的上下文？上下文是以什么格式传递给后端的？”</li>
+<li>“如果流式传输过程中网络中断了，你的‘自动重试机制’是如何工作的？重试多少次？会重新发送整个对话吗？”</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 状态持久化：</strong></p>
+<ul>
+<li>“你的对话状态持久化方案，Pinia和<code>localStorage</code>是如何协作的？是每次状态变化都立刻存吗？会不会有性能问题？”</li>
+<li>“<code>localStorage</code>有大小限制（通常5MB），如果用户的对话历史非常长，你怎么处理？”</li>
+</ul>
+<p><strong>3. 性能与体验：</strong></p>
+<ul>
+<li>“Markdown渲染是同步进行的吗？如果接收到一个很长的Markdown响应，会阻塞页面吗？你是怎么优化的？”</li>
+<li>“深色&#x2F;浅色主题切换是如何实现的？是用CSS变量吗？”</li>
+</ul>
+<p><strong>针对【易购商城】</strong></p>
+<p><strong>1. 状态管理：</strong></p>
+<ul>
+<li>“购物车状态的管理，你考虑了哪些信息（商品ID、数量、规格、单价等）？如何保证在页面刷新后购物车数据不丢失？”</li>
+<li>“用户登录状态是如何管理的？Token存在哪里？”</li>
+</ul>
+<p><strong>2. 工程化与开发流程：</strong></p>
+<ul>
+<li>“你为什么选择Mock.js？它是如何拦截Ajax请求的？和直接写死数据比起来有什么好处？”</li>
+<li>“前后端分离开发，除了Mock数据，你们还有哪些协作规范（比如接口文档）？”</li>
+</ul>
+<h3 id="三、-JavaScript-CSS-浏览器基础问题"><a href="#三、-JavaScript-CSS-浏览器基础问题" class="headerlink" title="三、 JavaScript &#x2F; CSS &#x2F; 浏览器基础问题"></a><strong>三、 JavaScript &#x2F; CSS &#x2F; 浏览器基础问题</strong></h3><p>框架是建立在基础之上的，这些问题必问。</p>
+<ul>
+<li><strong>JavaScript:</strong><ul>
+<li>“说说<code>let</code>、<code>const</code>、<code>var</code>的区别。”</li>
+<li>“什么是闭包？你在项目中有实际用到闭包的场景吗？”</li>
+<li>“什么是Promise？你在项目中如何处理多个异步请求？（比如并发请求或多个有依赖的请求）”</li>
+<li>“<code>async/await</code>有什么优点？”</li>
+<li>“什么是事件循环？”</li>
+</ul>
+</li>
+<li><strong>CSS:</strong><ul>
+<li>“如何实现一个元素的水平垂直居中？”</li>
+<li>“说说Flex布局和Grid布局，以及你分别在什么场景下使用它们？”</li>
+<li>“你如何理解CSS的盒子模型？”</li>
+</ul>
+</li>
+<li><strong>浏览器:</strong><ul>
+<li>“从输入URL到页面显示，发生了什么？” （经典八股文）</li>
+<li>“什么是跨域？你在开发中怎么解决跨域问题的？” （Mock.js其实就是一种前端解决跨域的方式）</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、-场景题-软性问题"><a href="#四、-场景题-软性问题" class="headerlink" title="四、 场景题 &amp; 软性问题"></a><strong>四、 场景题 &amp; 软性问题</strong></h3><p>这类问题考察你的解决问题能力和综合素养。</p>
+<ul>
+<li>“在项目中遇到的最大的技术挑战是什么？你是怎么解决的？”</li>
+<li>“如果‘灵犀AI’平台的用户反馈说，在网速慢的时候，聊天界面会卡顿，你会从哪些方面去排查和优化？”</li>
+<li>“你的个人博客主要写什么内容？最近一篇让你印象深刻的技术文章是什么？”</li>
+<li>“你为什么选择前端这个方向？你对你的技术生涯有什么规划？”</li>
+<li>“你为什么要出国留学？这个计划对你未来的职业发展有什么影响？”</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="/">Chenzyishere</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenzymark.space/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">https://blog.chenzymark.space/2025/11/14/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.chenzymark.space" target="_blank">Chenzyishere's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/frontend/">frontend</a><a class="post-meta__tags" href="/tags/javascript/">javascript</a><a class="post-meta__tags" href="/tags/json/">json</a><a class="post-meta__tags" href="/tags/network/">network</a><a class="post-meta__tags" href="/tags/css/">css</a><a class="post-meta__tags" href="/tags/vue/">vue</a><a class="post-meta__tags" href="/tags/storage/">storage</a><a class="post-meta__tags" href="/tags/typescript/">typescript</a></div><div class="post-share"><div class="social-share" data-image="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/11/20/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_React/" title="前端八股文_React"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">前端八股文_React</div></div><div class="info-2"><div class="info-item-1">React18的更新</div></div></div></a><a class="pagination-related" href="/2025/11/13/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80_ES6%E6%96%B0%E7%89%B9%E6%80%A7/" title="前端八股文_JS基础_ES6新特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">前端八股文_JS基础_ES6新特性</div></div><div class="info-2"><div class="info-item-1">常用的ES6的新特性：</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/01/01/%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" title="前端性能优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">前端性能优化</div></div><div class="info-2"><div class="info-item-1">前端性能优化</div></div></div></a><a class="pagination-related" href="/2025/10/05/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_Vue%E4%B8%93%E9%A2%98/" title="前端八股文——Vue专题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-05</div><div class="info-item-2">前端八股文——Vue专题</div></div><div class="info-2"><div class="info-item-1">Vue 核心概念、生命周期与路由模式总结。</div></div></div></a><a class="pagination-related" href="/2025/11/03/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_web%E5%AD%98%E5%82%A8HTTP%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="前端八股文——web存储&#x2F;HTTP&#x2F;计算机网络"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-03</div><div class="info-item-2">前端八股文——web存储&#x2F;HTTP&#x2F;计算机网络</div></div><div class="info-2"><div class="info-item-1">前端八股文——web存储/HTTP/计算机网络</div></div></div></a><a class="pagination-related" href="/2025/10/31/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_HTML%E5%92%8CCSS/" title="前端八股文——HTML&amp;CSS专题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-31</div><div class="info-item-2">前端八股文——HTML&amp;CSS专题</div></div><div class="info-2"><div class="info-item-1">HTML面试题</div></div></div></a><a class="pagination-related" href="/2025/11/25/%E5%89%8D%E7%AB%AF%E5%85%AB%E8%82%A1%E6%96%87_JS%E5%9F%BA%E7%A1%80%EF%BC%88%E6%9B%B4%E4%BB%94%E7%BB%86%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89/" title="前端八股文_JS基础（更仔细的版本）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-11-25</div><div class="info-item-2">前端八股文_JS基础（更仔细的版本）</div></div><div class="info-2"><div class="info-item-1">请简述JavaScript中的this</div></div></div></a><a class="pagination-related" href="/2026/01/01/SEO%E4%BC%98%E5%8C%96/" title="SEO优化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-01-01</div><div class="info-item-2">SEO优化</div></div><div class="info-2"><div class="info-item-1">SEO优化</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81-Vue-js-%E6%A0%B8%E5%BF%83%E4%B8%8E%E7%94%9F%E6%80%81%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">一、 Vue.js 核心与生态相关问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">1. 基础原理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">2. 状态管理：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E9%A1%B9%E7%9B%AE%E6%B7%B1%E5%BA%A6%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">二、 项目深度与实现细节问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-JavaScript-CSS-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">三、 JavaScript &#x2F; CSS &#x2F; 浏览器基础问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E5%9C%BA%E6%99%AF%E9%A2%98-%E8%BD%AF%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">四、 场景题 &amp; 软性问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Chenzyishere</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
