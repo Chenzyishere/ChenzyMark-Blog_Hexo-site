@@ -1,4 +1,14 @@
-# Openclaw小红书信息流自动化账号心得
+---
+title: "Openclaw小红书信息流自动化账号心得"
+date: 2026-06-28 12:00:00
+updated: 2026-06-28 12:00:00
+tags:
+  - openclaw
+  - xiaohongshu
+  - automation
+  - ai-agent
+description: "使用 Openclaw 搭建小红书信息流自动发布工作流，包括 AI 文案编辑、封面生成、无头浏览器自动发布全流程实践。"
+---
 
 这个周末开始尝试折腾小红书自动发布工作流，打算用已经部署在阿里云2核2G服务器的Openclaw进行试验信息流编辑+自动发布全流程。
 

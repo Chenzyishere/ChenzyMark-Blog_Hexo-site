@@ -1,4 +1,14 @@
-leetCode
+---
+title: "leetCode——Group Anagrams"
+date: 2026-01-01 10:00:00
+updated: 2026-01-01 10:00:00
+tags:
+  - algorithm
+  - leetcode
+  - javascript
+  - hashmap
+description: "LeetCode 49——字母异位词分组，使用哈希表 + 排序键的解法。"
+---
 
 ```
 /**
