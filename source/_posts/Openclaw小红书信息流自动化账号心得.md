@@ -38,4 +38,7 @@
 
 为了减轻一点费用开销，我让Openclaw切换默认模型为deepseek-v4-flash，在需要coding任务的时候在切换成v4-pro。希望能有用吧。
 
+----最新消息----
+它跑不动了，被小红书风控了。转战wsl。
+
 ![image-20260628113839973](https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628113839973.png)
