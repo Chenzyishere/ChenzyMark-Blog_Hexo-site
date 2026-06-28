@@ -1,5 +1,6 @@
 ---
 title: "前端八股文_React"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251120224436171.png
 date: 2025-11-20 22:47:08
 updated: 2026-03-25 17:52:39
 tags:

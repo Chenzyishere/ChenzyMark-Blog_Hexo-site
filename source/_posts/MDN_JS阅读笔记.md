@@ -1,5 +1,6 @@
 ---
 title: "MDN_JS概览阅读笔记"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/DSC08231.jpg
 date: 2026-04-09 21:00:00
 updated: 2026-04-09 21:00:00
 tags:

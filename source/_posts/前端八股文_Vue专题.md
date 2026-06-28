@@ -1,5 +1,6 @@
 ﻿---
 title: "前端八股文——Vue专题"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251104103601523.png
 author: Chenzy
 date: 2025-10-05 10:00:00
 updated: 2026-04-09 00:00:00

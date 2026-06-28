@@ -1,5 +1,6 @@
 ---
 title: 前端八股文——HTML&CSS专题
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251026141937549.png
 date: 2025-10-31 10:00:00
 updated: 2026-03-25 17:51:47
 tags:

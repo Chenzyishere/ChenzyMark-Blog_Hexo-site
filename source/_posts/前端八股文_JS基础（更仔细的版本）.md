@@ -1,5 +1,6 @@
 ---
 title: "前端八股文_JS基础（更仔细的版本）"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251123174638319.png
 date: 2025-11-25 14:46:08
 updated: 2026-03-25 17:52:39
 tags:

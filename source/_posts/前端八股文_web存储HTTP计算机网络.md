@@ -1,5 +1,6 @@
 ---
 title: "前端八股文——web存储/HTTP/计算机网络"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20251103213950748.png
 date: 2025-11-03 22:00:32
 updated: 2026-03-25 17:52:39
 tags:

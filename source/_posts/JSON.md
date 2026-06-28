@@ -1,5 +1,6 @@
 ---
 title: "JSON"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/DSC08231.jpg
 date: 2026-01-01 11:32:59
 updated: 2026-03-25 17:52:39
 tags:

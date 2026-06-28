@@ -1,5 +1,6 @@
 ---
 title: "Openclaw小红书信息流自动化账号心得"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120206002.png
 date: 2026-06-28 12:00:00
 updated: 2026-06-28 12:00:00
 tags:

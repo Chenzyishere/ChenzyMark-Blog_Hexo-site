@@ -1,5 +1,6 @@
 ---
 title: "前端八股文_JS基础_ES6新特性"
+cover: https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/DSC08231.jpg
 date: 2025-11-13 12:06:31
 updated: 2026-03-25 17:52:39
 tags:
