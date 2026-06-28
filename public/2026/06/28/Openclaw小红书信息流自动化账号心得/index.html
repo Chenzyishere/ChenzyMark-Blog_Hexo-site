@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Chenzyishere's blog | Chenzyishere's blog</title><meta name="author" content="Chenzyishere"><meta name="copyright" content="Chenzyishere"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#020617"><meta name="description" content="Openclaw小红书信息流自动化账号心得这个周末开始尝试折腾小红书自动发布工作流，打算用已经部署在阿里云2核2G服务器的Openclaw进行试验信息流编辑+自动发布全流程。 Openclaw方案制定首先我是先让Openclaw先给出小红书信息流自动发布的方案，然后让他在ClawHub和Github搜索已经成熟的skills进行参考。然后让他将制定好的方案拆分成多个skills。最后的方案是制作一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chenzyishere&#39;s blog">
+<meta property="og:url" content="https://blog.chenzymark.space/2026/06/28/Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="Chenzyishere&#39;s blog">
+<meta property="og:description" content="Openclaw小红书信息流自动化账号心得这个周末开始尝试折腾小红书自动发布工作流，打算用已经部署在阿里云2核2G服务器的Openclaw进行试验信息流编辑+自动发布全流程。 Openclaw方案制定首先我是先让Openclaw先给出小红书信息流自动发布的方案，然后让他在ClawHub和Github搜索已经成熟的skills进行参考。然后让他将制定好的方案拆分成多个skills。最后的方案是制作一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg">
+<meta property="article:published_time" content="2026-06-28T04:31:31.404Z">
+<meta property="article:modified_time" content="2026-06-28T04:31:31.318Z">
+<meta property="article:author" content="Chenzyishere">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "url": "https://blog.chenzymark.space/2026/06/28/Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97/",
+  "image": "https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg",
+  "datePublished": "2026-06-28T04:31:31.404Z",
+  "dateModified": "2026-06-28T04:31:31.318Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chenzyishere",
+      "url": "https://blog.chenzymark.space/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.chenzymark.space/2026/06/28/Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f172a')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"top_n_per_article":2,"unescape":false,"pagination":{"enable":true,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":true,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Chenzyishere\'s blog',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="bg-animation" id="web_bg" style="background: linear-gradient(135deg, #0b1020 0%, #0f1b36 45%, #12324a 100%);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Chenzyishere's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Chenzyishere's blog</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-folder-open"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/taxonomy/"><i class="fa-fw fas fa-layer-group"></i><span> 知识索引</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">无标题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-28T04:31:31.404Z" title="发表于 2026-06-28 04:31:31">2026-06-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-28T04:31:31.318Z" title="更新于 2026-06-28 04:31:31">2026-06-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">784</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Openclaw小红书信息流自动化账号心得"><a href="#Openclaw小红书信息流自动化账号心得" class="headerlink" title="Openclaw小红书信息流自动化账号心得"></a>Openclaw小红书信息流自动化账号心得</h1><p>这个周末开始尝试折腾小红书自动发布工作流，打算用已经部署在阿里云2核2G服务器的Openclaw进行试验信息流编辑+自动发布全流程。</p>
+<h2 id="Openclaw方案制定"><a href="#Openclaw方案制定" class="headerlink" title="Openclaw方案制定"></a>Openclaw方案制定</h2><p>首先我是先让Openclaw先给出小红书信息流自动发布的方案，然后让他在ClawHub和Github搜索已经成熟的skills进行参考。然后让他将制定好的方案拆分成多个skills。最后的方案是制作一个龙虾弟小红书每日要闻。分成三个skills来制作：1.kimi search+fetch等等获取当日要闻并且完成文案编辑。2.调用阿里云百炼中的生图模型生成一个封面图3.Openclaw自动发布到小红书。利用linux里的无头浏览器，然后登录小红书的账号给他操作。<img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120206002.png" alt="image-20260628120206002"><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628115917622.png" alt="image-20260628115917622"></p>
+<h2 id="文案编辑"><a href="#文案编辑" class="headerlink" title="文案编辑"></a>文案编辑</h2><p>文案编辑是解决的最容易的。获取了Kimi的API key，然后发给Openclaw让他给你配好，就可以用Kimi Search了。Kimi新用户有15元的web search额度。使用起来还行。但是不知道为什么27号就发现它挂了，用不了。但是Openclaw通过web_fetch等等其他的方式还可以搜到今日要闻，所以就先没管了。</p>
+<h2 id="调用生图模型"><a href="#调用生图模型" class="headerlink" title="调用生图模型"></a>调用生图模型</h2><p>沿着一开始的方案，Openclaw使用了百炼里的qwen生图，但是生成的封面图文字全部变形。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120140010.png" alt="image-20260628120140010"></p>
+<p>我反馈给Openclaw后它给出了另外一个方案，利用qwen的底图，然后再用Pillow来生成文字。虽然文字正常了，但是美观度不行。<br><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120020237.png" alt="image-20260628120020237"></p>
+<p>我就让他在github里找了ui-ux-pro-max skill来重新生成，并且最后选择了用HTML生成图排版的效果来做，效果好了很多。最后再让他优化了几版，感觉还过得去。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120009474.png" alt="image-20260628120009474"></p>
+<h2 id="小红书发布流程"><a href="#小红书发布流程" class="headerlink" title="小红书发布流程"></a>小红书发布流程</h2><p>我让Openclaw参考了这个来做小红书发布的自动化。但是由于是Linux服务器，没有GUI。它好像只能在无头浏览器里面弄，登录的过程又要给他发cookie，操作并不直观。而且可能是服务器内存太小的缘故，它做着做着就卡住了。<br>做到这里，我感觉Openclaw部署在低端便宜服务器的上限可能还是太低了，正在考虑是否要转成在自己的电脑里用WSL来跑Openclaw。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628115905740.png" alt="image-20260628115905740"><br><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628120628970.png" alt="image-20260628120628970"></p>
+<h2 id="费用预期"><a href="#费用预期" class="headerlink" title="费用预期"></a>费用预期</h2><p>当项目有点进展时，我看了下deepseek platform近两日的数据，发现Token消耗量是比我想象中要夸张得多的：26-28号，deepseek-v4-pro消耗了近4亿的token，烧了80-90元。当初使用deepseek是看中它在国内的性价比，但是用来做Openclaw，这个费用金额依然远远超乎了我的预期。如果是更换到其他家的模型，可能一天的消耗会再高好几倍。</p>
+<p>为了减轻一点费用开销，我让Openclaw切换默认模型为deepseek-v4-flash，在需要coding任务的时候在切换成v4-pro。希望能有用吧。</p>
+<p><img src="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/image-20260628113839973.png" alt="image-20260628113839973"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="/">Chenzyishere</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.chenzymark.space/2026/06/28/Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97/">https://blog.chenzymark.space/2026/06/28/Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.chenzymark.space" target="_blank">Chenzyishere's blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://chenzyishere.oss-cn-guangzhou.aliyuncs.com/img_for_typora/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20230212223354.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/06/28/leetCode%20copy/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">leetCode 1234567891011121314151617/** * @param &#123;string[]&#125; strs * @return &#123;string[][]&#125; */let groupAnagrams = function(strs)&#123;    const map = new Map();//创建一个map用来标准化键为key，存储对应的anagram数组。    for(let str of strs)&#123;//用for of来遍历数组元素        let array = Array.from(str);//从str中浅拷贝一个数据实例        array.sort()//排序        let key = array.join(&#x27;&#x27;);//将排序后的数组转换成字符串，作为哈希表的key，用于标识一组anagrams        let list = map.get(key)?map.get(key):new Array();        //检查map中是否已有该key对应...</div></div></div></a><a class="pagination-related" href="/2026/04/09/MDN_JS%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" title="MDN_JS概览阅读笔记"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">MDN_JS概览阅读笔记</div></div><div class="info-2"><div class="info-item-1">MDN上对JavaScript的介绍相当充分，本文档记录快速阅读JavaScript语言概览后记下来的知识点。 数据类型：（原始类型&#x2F;对象）原始类型：Number:表示除了非常大的整数之外的所有数值（整数和浮点数） BigInt:表示任意大整数 String:用于存储文本 Boolean：true和false–通常用于条件逻辑 Symbol:用于创建唯一的、不会冲突的标识符 Undefined:变量还未被赋值 Null:故意的空值 ​	快速记忆：可以分为五类：数字类有Number\BigInt，文本类有String，空值&#x2F;未定义有Null&#x2F;Undefined，唯一值有Symbol，判断值有Symbol（其实感觉也不太好记，其实多用就完事了） 对象类型：Function：函数 Array：数组 Date:时间 RegExp:正则表达式 Error:错误 重点要关注的有Function&#x2F;Array&#x2F;RegExp 关于类型的还有很多详细的知识，比如说数值中的NaN，Infinity，字符串转为数值parseInt()等知识点。先快速跳过...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Openclaw%E5%B0%8F%E7%BA%A2%E4%B9%A6%E4%BF%A1%E6%81%AF%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E8%B4%A6%E5%8F%B7%E5%BF%83%E5%BE%97"><span class="toc-number">1.</span> <span class="toc-text">Openclaw小红书信息流自动化账号心得</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Openclaw%E6%96%B9%E6%A1%88%E5%88%B6%E5%AE%9A"><span class="toc-number">1.1.</span> <span class="toc-text">Openclaw方案制定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%A1%88%E7%BC%96%E8%BE%91"><span class="toc-number">1.2.</span> <span class="toc-text">文案编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%94%9F%E5%9B%BE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">调用生图模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BA%A2%E4%B9%A6%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">小红书发布流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B9%E7%94%A8%E9%A2%84%E6%9C%9F"><span class="toc-number">1.5.</span> <span class="toc-text">费用预期</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Chenzyishere</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.4"></script></div></div></body></html>
